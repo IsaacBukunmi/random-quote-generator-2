@@ -1,13 +1,230 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color:#3a1717;
+  background-image: linear-gradient(90deg, #3a1717, #af2323);
+  font-family: 'Nunito', sans-serif;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.quote-header h1{
+  color:#FFFFFF;
+  text-align:center;
+  margin-top:40px;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+-moz-animation: glow 1s ease-in-out infinite alternate;
+animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #3a1717, 0 0 40px #3a1717, 0 0 50px #3a1717, 0 0 60px #3a1717, 0 0 70px #3a1717;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #af2323, 0 0 40px #af2323, 0 0 50px #af2323, 0 0 60px #af2323, 0 0 70px #af2323, 0 0 80px #af2323;
+  }
+}
+
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #3a1717, 0 0 40px #3a1717, 0 0 50px #3a1717, 0 0 60px #3a1717, 0 0 70px #3a1717;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #af2323, 0 0 40px #af2323, 0 0 50px #af2323, 0 0 60px #af2323, 0 0 70px #af2323, 0 0 80px #af2323;
+  }
+}
+
+
+.quote-section{
+  display:flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content:center;
+  height:70vh;
+  margin:0;
+}
+
+.quote-container{
+  color: #ffffff;
+  width:35%;
+  background-color:#591515;
+  border:1px solid #FFFFFF;
+  padding:35px;
+  box-shadow: -1px -2px 20px 6px rgba(0,0,0,0.75);
+}
+
+.quote-container button{
+  background-color: #af2323;
+  color:#FFFFFF;
+  border: none;
+  padding:10px;
+  border-radius:4px;
+  cursor: pointer;
+  float:right;
+  margin-bottom:15px;
+  box-shadow: 0px -2px 16px -2px rgba(0,0,0,0.75);
+}
+
+.quote-container button:focus{
+  outline:#af2323;
+}
+
+.quote-text{
+  clear:both;
+  
+}
+
+.quote-anim{
+  animation-name: quote-animation;
+  -webkit-animation-name: quote-animation;
+  animation-duration: 2s;
+  -webkit-animation-duration: 1s;
+  animation-timing-function: ease-in;
+  -webkit-animation-timing-function: ease-in;
+}
+
+.mobile-arrow-dir{
+  float:right;
+  margin-top:10px;
+  display: none;
+}
+
+.mobile-arrow-dir .mobile-left{
+  margin-right:20px;
+  cursor: pointer;
+}
+
+.mobile-arrow-dir .mobile-right{
+  cursor: pointer;
+}
+
+@keyframes quote-animation{
+  0%{
+      opacity:0.1
+  }
+  50%{
+      opacity:1;
+      transform:scale(1.1);
+  }
+}
+
+@-webkit-keyframes quote-animation{
+  0%{
+      opacity:0.1
+  }
+  50%{
+      opacity:1;
+
+  }
+}
+
+.quote-text p{
+  font-size:20px;
+  font-style: italic;
+}
+
+.quote-text span{
+  font-size:18px;
+  color:#fcb594;
+  font-weight:bold;
+}
+
+.backward-button{
+  background-color: #3a1717;
+  border-radius:50%;
+  padding:10px;
+  margin-right:80px;
+  cursor: pointer;
+  box-shadow: -1px -2px 20px 6px rgba(0,0,0,0.75);
+}
+
+.forward-button{
+  background-color: #3a1717;
+  border-radius:50%;
+  padding:10px;
+  margin-left:80px;
+  cursor: pointer;
+  box-shadow: -1px -2px 20px 6px rgba(0,0,0,0.75);
+}
+
+.remove-first-quote{
+  display: none;
+}
+
+.remove-random-quote{
+  display: none;
+}
+
+@media(max-width:990px){
+  .quote-container{
+      width:50%;
+  }
+}
+
+@media(max-width:870px){
+  .backward-button{
+    margin-right:50px;
+  }
+
+  .forward-button{
+    margin-left:50px;
+  }
+}
+
+@media(max-width:720px){
+  .backward-button{
+    margin-right:30px;
+  }
+
+  .forward-button{
+    margin-left:30px;
+  }
+}
+
+@media(max-width:650px){
+  .backward-button{
+    display: none;
+  }
+
+  .forward-button{
+    display: none;
+  }
+
+  .mobile-arrow-dir{
+    display: block !important;
+  }
+
+  .quote-container{
+    width:70%;
+}
+}
+
+@media(max-width:500px){
+  .quote-container{
+      width:80%;
+  }
+
+  .mobile-arrow-dir{
+    display: block !important;
+  }
+}
+
+@media(max-width:430px){
+  .quote-container{
+      width:70%;
+  }
+}
+
+@media(max-width:330px){
+  .quote-container{
+      width:65%;
+  }
 }
