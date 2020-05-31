@@ -19,6 +19,7 @@ class QuoteGenerator extends React.Component{
         addRandomQuote:false,
         current:0,
         directionIsRight:true,
+        directionIsLeft:true,
         nextQuote: "",
         addNextQuote: true,
       }
@@ -56,7 +57,12 @@ class QuoteGenerator extends React.Component{
     } 
 
     handleDirectionClick = () => {
-      this.state.current++;
+      if(this.state.directionIsRight){
+        this.state.current++;
+      }else if(this.state.directionIsLeft){
+        this.state.current--;
+        console.log(this.state.current--)
+      }
       let index = this.state.QuoteArray.findIndex(item => item === this.state.QuoteArray[this.state.current]);
       const getNextQuote = this.state.QuoteArray[index].text
       const getNextQuoteAuthor = this.state.QuoteArray[index].author
@@ -88,7 +94,7 @@ class QuoteGenerator extends React.Component{
       return(
         <div>
            <section className="quote-section">
-               <div className="backward-button">
+               <div className="backward-button" onClick={ this.state.directionIsLeft && this.handleDirectionClick }>
                     <img src={LeftArrow} alt="" />
                </div>
               
@@ -126,10 +132,12 @@ class QuoteGenerator extends React.Component{
                         <img className="mobile-right" onClick={this.handleDirectionClick } src={MobileRightArrow} alt=""/>
                       </div>
                   </div>
-               
-                <div className="forward-button"  onClick={this.handleDirectionClick }>
+                   
+                  <div className="forward-button" onClick={ this.state.directionIsRight && this.handleDirectionClick }>
                     <img src={RightArrow} alt="" />
-                </div>
+                  </div>
+                 
+                  
            </section>
         </div>
       )
