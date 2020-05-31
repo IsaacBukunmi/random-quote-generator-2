@@ -16,7 +16,11 @@ class QuoteGenerator extends React.Component{
         randomQuoteAuthor : "",
         QuoteArray : [],
         addFirstQuote: true,
-        addRandomQuote:false
+        addRandomQuote:false,
+        current:0,
+        directionIsRight:true,
+        nextQuote: "",
+        addNextQuote: true,
       }
     }
 
@@ -38,26 +42,47 @@ class QuoteGenerator extends React.Component{
         const randomNum = Math.floor(Math.random() * this.state.QuoteArray.length);
         const randomQuoteText = this.state.QuoteArray[randomNum].text;
         const randomQuoteAuthor = this.state.QuoteArray[randomNum].author;
-        console.log(this.state.QuoteArray.indexOf(randomQuoteText));
+        // const index = this.state.QuoteArray.findIndex(item => item === this.state.QuoteArray[randomNum])
+        // const next = index + 1
+        // const getNextQuote = this.state.QuoteArray[next].text
         this.setState({
             randomQuote : randomQuoteText,
             randomQuoteAuthor : randomQuoteAuthor,
-            firstQuote : "",
-            firstQuoteAuthor : "",
             addFirstQuote:false,
-            addRandomQuote:true
+            addRandomQuote:true,
+            addNextQuote: false,
+            // nextQuote: getNextQuote
         })
     } 
+
+    handleDirectionClick = () => {
+      this.state.current++;
+      let index = this.state.QuoteArray.findIndex(item => item === this.state.QuoteArray[this.state.current]);
+      const getNextQuote = this.state.QuoteArray[index].text
+      const getNextQuoteAuthor = this.state.QuoteArray[index].author
+      this.setState({
+        nextQuote: getNextQuote,
+        nextQuoteAuthor: getNextQuoteAuthor,
+        addFirstQuote:false,
+        addRandomQuote:false,
+        addNextQuote: true,
+    })
+    }
   
     render(){
       let firstQuoteClass = "first-quote";
-      if (this.state.addFirstQuote == false){
+      if (this.state.addFirstQuote === false){
         firstQuoteClass = "remove-first-quote";
       }
 
-      let randomQuoteClass = ["remove-random-quote"];
-      if (this.state.addRandomQuote == true){
+      let randomQuoteClass = "remove-random-quote";
+      if (this.state.addRandomQuote === true){
         randomQuoteClass="random-quote quote-anim";
+      }
+
+      let nextQuoteClass = "next-quote-class";
+      if (this.state.addNextQuote === false){
+        nextQuoteClass="remove-next-quote";
       }
 
       return(
@@ -71,8 +96,14 @@ class QuoteGenerator extends React.Component{
                       <button onClick={this.handleClick}>Generate Quote</button>
                       <div className="quote-text"> 
                           <div className={firstQuoteClass}>
-                            <p><img src={QuoteImg} alt="quote image" /> {this.state.firstQuote}</p>
-                            <span>- {this.state.firstQuoteAuthor}</span>
+                            {
+                              this.state.firstQuote && 
+                              <p><img src={QuoteImg} alt="quote image" /> {this.state.firstQuote}</p>
+                            }
+                            {
+                              this.state.firstQuoteAuthor && <span>- {this.state.firstQuoteAuthor}</span>
+                            }
+                            
                           </div> 
                           <div className={randomQuoteClass}>
                             <p><img src={QuoteImg} alt="quote image" /> {this.state.randomQuote}</p>
@@ -80,14 +111,23 @@ class QuoteGenerator extends React.Component{
                               this.state.randomQuoteAuthor && <span>- {this.state.randomQuoteAuthor}</span>
                             } 
                           </div>
+                          <div className={nextQuoteClass}>
+                            {
+                            this.state.nextQuote && 
+                            <p><img src={QuoteImg} alt="quote image" /> {this.state.nextQuote}</p>
+                            }
+                            {
+                              this.state.nextQuoteAuthor && <span>- {this.state.nextQuoteAuthor}</span>
+                            } 
+                          </div>
                       </div>
                       <div className="mobile-arrow-dir">
                         <img className="mobile-left" src={MobileLeftArrow}  alt=""/>
-                        <img className="mobile-right" src={MobileRightArrow} alt=""/>
+                        <img className="mobile-right" onClick={this.handleDirectionClick } src={MobileRightArrow} alt=""/>
                       </div>
                   </div>
                
-                <div className="forward-button">
+                <div className="forward-button"  onClick={this.handleDirectionClick }>
                     <img src={RightArrow} alt="" />
                 </div>
            </section>

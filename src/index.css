@@ -155,11 +155,7 @@ animation: glow 1s ease-in-out infinite alternate;
   box-shadow: -1px -2px 20px 6px rgba(0,0,0,0.75);
 }
 
-.remove-first-quote{
-  display: none;
-}
-
-.remove-random-quote{
+.remove-first-quote, .remove-random-quote, .remove-next-quote{
   display: none;
 }
 
